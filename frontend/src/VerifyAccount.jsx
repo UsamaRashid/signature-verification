@@ -65,7 +65,7 @@ export default function VerifyAccount() {
         };
         const result = await fetch(
           // `http://localhost:5000/api/verifySignature`
-          `https://signature-verification-w2yj.vercel.app/api/getMessage`,
+          `https://signature-verification-w2yj.vercel.app/api/verifySignature`,
           requestOptions2
         );
         const res = await result.json();
