@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("./corsmiddleware");
+// const cors = require("./corsmiddleware");
 const bodyParser = require("body-parser");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.json());
-app.use(cors());
+app.use(require("cors")());
 
 // Generate a random nonce
 function generateNonce() {
@@ -40,17 +40,24 @@ const Signature = mongoose.model("Signature", signatureSchema);
 const SignatureToken = mongoose.model("SignatureToken", signatureTokenSchema);
 
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://usama:12345@cluster0.ol3kboj.mongodb.net/SignatureVerfication",
-  // "mongodb://localhost:27017/"
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose
+  .connect(
+    "mongodb+srv://usama:12345@cluster0.ol3kboj.mongodb.net/SignatureVerfication",
+    // "mongodb://localhost:27017/"
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => {
+    console.log("Connection to DB is established");
+  })
+  .catch((e) => {
+    console.log("Error", e);
+  });
 
 // Step 1: Client sends address to server and receives a unique message to sign
-app.post("/api/getMessage", (req, res) => {
+app.post("/api/getMessage", async (req, res) => {
   const { address } = req.body;
 
   console.log("Address", address);
@@ -179,6 +186,10 @@ app.post("/api/verifySignature2", (req, res) => {
   const nonce = generateNonce();
   console.log("generateNonce", nonce);
   res.send();
+});
+
+app.get("/api/something", (req, res) => {
+  return "Hello World ";
 });
 
 // mongodb://localhost:27017
