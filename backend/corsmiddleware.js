@@ -1,5 +1,9 @@
 const cors = require("cors");
-const allowlist = ["http://localhost:3000", "http://localhost:3001"];
+const allowlist = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "https://signature-verification-beryl.vercel.app/",
+];
 const corsOptionsDelegate = (req, callback) => {
   const corsOptions = {
     methods: ["POST", "GET", "PUT", "DELETE"],
