@@ -40,10 +40,14 @@ const Signature = mongoose.model("Signature", signatureSchema);
 const SignatureToken = mongoose.model("SignatureToken", signatureTokenSchema);
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/SignatureVerfication", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://usama:12345@cluster0.ol3kboj.mongodb.net/SignatureVerfication",
+  // "mongodb://localhost:27017/"
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 // Step 1: Client sends address to server and receives a unique message to sign
 app.post("/api/getMessage", (req, res) => {
