@@ -31,7 +31,11 @@ export default function VerifyAccount() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ address: account }), // Convert your data to a JSON string
     };
-    fetch(`http://localhost:5000/api/getMessage`, requestOptions)
+    fetch(
+      // `http://localhost:5000/api/getMessage`
+      `https://signature-verification-w2yj.vercel.app/api/getMessage`,
+      requestOptions
+    )
       .then(async (res) => {
         //   const resJson = await res.json();
         const resJson = await res.json();
@@ -60,7 +64,8 @@ export default function VerifyAccount() {
           }), // Convert your data to a JSON string
         };
         const result = await fetch(
-          `http://localhost:5000/api/verifySignature`,
+          // `http://localhost:5000/api/verifySignature`
+          `https://signature-verification-w2yj.vercel.app/api/getMessage`,
           requestOptions2
         );
         const res = await result.json();
